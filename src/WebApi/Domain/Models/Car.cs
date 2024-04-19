@@ -2,7 +2,7 @@
 {
     public class Car : Entity
     {
-        public Car(string brand, string model, string color, DateTime yearManufacture)
+        public Car(Guid id, string brand, string model, string color, DateTime yearManufacture) : base(id)
         {
             Brand = brand;
             Model = model;

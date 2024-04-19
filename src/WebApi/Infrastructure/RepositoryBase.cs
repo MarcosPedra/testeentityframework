@@ -8,12 +8,12 @@ namespace WebApi.Infrastructure
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : Entity
     {
         public readonly DbSet<TEntity> _dbSet;
-        public readonly DataContext dataContext;
+        public readonly DataContext _dataContext;
 
         public RepositoryBase(DbSet<TEntity> dbSet, DataContext dataContext)
         {
             _dbSet = dbSet;
-            this.dataContext = dataContext;
+            _dataContext = dataContext;
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

@@ -2,7 +2,7 @@
 
 namespace WebApi.Interfaces
 {
-    public interface ICarRepository
+    public interface ICarRepository : IRepositoryBase<Car>
     {
         Task<IEnumerable<Car>> GetAllCarAsync();
     }
