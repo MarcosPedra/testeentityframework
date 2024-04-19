@@ -5,9 +5,16 @@ namespace WebApi.Infrastructure
 {
     public class CarRepository : ICarRepository
     {
-        public Task<IEnumerable<Car>> GetAllCarAsync()
+        private readonly IRepositoryBase<Car> _repositoryBase;
+
+        public CarRepository(IRepositoryBase<Car> repositoryBase)
         {
-            throw new NotImplementedException();
+            _repositoryBase = repositoryBase;
+        }
+
+        public async Task<IEnumerable<Car>> GetAllCarAsync()
+        {
+            return await _repositoryBase.GetAllAsync();
         }
     }
 }
