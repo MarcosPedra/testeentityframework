@@ -26,7 +26,7 @@ namespace WebApi
 
             });
 
-            services.AddScoped(typeof(IRepositoryBase<>), typeof(IRepositoryBase<>));
+            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             services.AddScoped<ICarRepository, CarRepository>();
         }
 
