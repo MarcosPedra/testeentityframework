@@ -20,7 +20,6 @@ namespace WebApi.Extensions
 
         public static IServiceCollection AddRepositories(this IServiceCollection services) 
         {
-            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             services.AddScoped<ICarRepository, CarRepository>();
 
             return services;
