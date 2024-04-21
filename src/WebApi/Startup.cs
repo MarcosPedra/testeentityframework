@@ -20,6 +20,7 @@ namespace WebApi
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
             services.AddEntityFramework(Configuration);
             services.AddRepositories();
         }

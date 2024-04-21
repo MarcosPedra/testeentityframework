@@ -1,20 +1,38 @@
-﻿using WebApi.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApi.Context;
+using WebApi.Domain.Models;
+using WebApi.Dtos;
 using WebApi.Interfaces;
 
 namespace WebApi.Infrastructure
 {
     public class CarRepository : ICarRepository
     {
-        private readonly IRepositoryBase<Car> _repositoryBase;
+        
+        public readonly DataContext _dataContext;
 
-        public CarRepository(IRepositoryBase<Car> repositoryBase)
+        public CarRepository(DataContext dataContext)
         {
-            _repositoryBase = repositoryBase;
+            this._dataContext = dataContext;
         }
 
         public async Task<IEnumerable<Car>> GetAllCarAsync()
         {
-            return await _repositoryBase.GetAllAsync();
+            return await _dataContext.Cars
+                           .AsNoTracking()
+                           .ToListAsync();
+        }
+
+        public async Task<CarDto> GetCarsWithPaginationAsync(int skip, int take)
+        {
+            var total = await _dataContext.Cars.CountAsync();
+            var data = await _dataContext.Cars
+                             .AsNoTracking()
+                             .Skip(skip)
+                             .Take(take)
+                             .ToListAsync();
+
+            return new CarDto(total, data);
         }
     }
 }
