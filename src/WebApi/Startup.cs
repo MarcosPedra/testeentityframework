@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApi.Context;
+using WebApi.Extensions;
 using WebApi.Infrastructure;
 using WebApi.Interfaces;
 
@@ -19,15 +20,8 @@ namespace WebApi
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("Default"));
-
-            });
-
-            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddEntityFramework(Configuration);
+            services.AddRepositories();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
